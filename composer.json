@@ -1,0 +1,44 @@
+{
+    "name": "mpyw/laravel-database-mock",
+    "description": "Database Mocking Library which mocks PDO underlying Laravel Connection classes",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mpyw",
+            "email": "ryosuke_i_628@yahoo.co.jp"
+        }
+    ],
+    "keywords": ["laravel", "database", "mock", "mocking", "unit", "test", "illuminate", "query", "eloquent"],
+    "autoload": {
+        "psr-4": {
+            "Mpyw\\LaravelDatabaseMock\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mpyw\\LaravelDatabaseMock\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "ext-pdo": "*",
+        "illuminate/database": "^5.6 || ^6.0 || ^7.0 || ^8.0",
+        "illuminate/support": "^5.6 || ^6.0 || ^7.0 || ^8.0",
+        "mpyw/mockery-pdo": "0.0.1-alpha4@alpha"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "php-coveralls/php-coveralls": "^2.1",
+        "nilportugues/sql-query-formatter": "^1.2",
+        "awobaz/compoships": "^2.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mpyw\\LaravelDatabaseMock\\DatabaseMockServiceProvider"
+            ]
+        }
+    }
+}
