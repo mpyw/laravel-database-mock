@@ -4,7 +4,7 @@
 
 ## Requirements
 
-- PHP: `^7.1`
+- PHP: `^7.1 || ^8.0`
 - Laravel: `^5.6 || ^6.0 || ^7.0 || ^8.0`
 - Mockery: `^1.0`
 - [mpyw/mockery-pdo](https://github.com/mpyw/mockery-pdo): `alpha`
