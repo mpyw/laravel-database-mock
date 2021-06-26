@@ -49,7 +49,7 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.lib.laravel }}" --dev --no-update ${{ matrix.lib.composer_flags }}
           if php -r 'exit((int)!version_compare(PHP_VERSION, "8", ">="));'; then
-            composer require "orchestra/testbench:>=4.13" --dev --no-update ${{ matrix.lib.composer_flags }}
+            composer require "orchestra/testbench:>=4.14" --dev --no-update ${{ matrix.lib.composer_flags }}
             composer require "phpunit/phpunit:>=9.3" --dev --no-update ${{ matrix.lib.composer_flags }}
           else
             composer require "orchestra/testbench:${{ matrix.lib.testbench }}" --dev --no-update ${{ matrix.lib.composer_flags }}
