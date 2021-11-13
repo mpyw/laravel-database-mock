@@ -4,9 +4,9 @@
 
 ## Requirements
 
-- PHP: `^7.1 || ^8.0`
-- Laravel: `^5.6 || ^6.0 || ^7.0 || ^8.0`
-- Mockery: `^1.0`
+- PHP: `^7.3 || ^8.0`
+- Laravel: `^6.0 || ^7.0 || ^8.0`
+- Mockery: `^1.3.3 || ^1.4.2`
 - [mpyw/mockery-pdo](https://github.com/mpyw/mockery-pdo): `alpha`
 
 ## Installing
