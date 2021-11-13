@@ -29,7 +29,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "*",
-        "nilportugues/sql-query-formatter": "^1.2",
+        "nilportugues/sql-query-formatter": "^1.2.2",
         "awobaz/compoships": "^2.0"
     },
     "extra": {
