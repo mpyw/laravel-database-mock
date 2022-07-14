@@ -10,7 +10,7 @@ jobs:
       matrix:
         php: [7.3, 7.4, '8.0', 8.1]
         lib:
-          # - { laravel: ^10.0 } # Waiting topclaudy/compoships update
+          - { laravel: ^10.0 }
           - { laravel: ^9.0 }
           - { laravel: ^8.0 }
           - { laravel: ^7.0 }
