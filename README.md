@@ -1,6 +1,9 @@
 # Laravel Database Mock [![Build Status](https://github.com/mpyw/laravel-database-mock/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/mpyw/laravel-database-mock/actions) [![Coverage Status](https://coveralls.io/repos/github/mpyw/laravel-database-mock/badge.svg?branch=master)](https://coveralls.io/github/mpyw/laravel-database-mock?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mpyw/laravel-database-mock/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mpyw/laravel-database-mock/?branch=master)
 
-**[Experimental]** Database Mocking Library which mocks `PDO` underlying Laravel Connection classes.
+> [!WARNING]
+> **Experimental**
+
+Database Mocking Library which mocks `PDO` underlying Laravel Connection classes.
 
 ## Requirements
 
