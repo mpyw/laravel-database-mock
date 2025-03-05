@@ -21,16 +21,16 @@
         }
     },
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": "^8.2",
         "ext-pdo": "*",
-        "illuminate/database": "^9.0 || ^10.0 || ^11.0",
-        "illuminate/support": "^9.0 || ^10.0 || ^11.0",
-        "mpyw/mockery-pdo": "0.0.1-alpha7@alpha"
+        "illuminate/database": "^11.0 || ^12.0 || ^13.0",
+        "illuminate/support": "^11.0 || ^12.0 || ^13.0",
+        "mpyw/mockery-pdo": "0.0.1-alpha8@alpha"
     },
     "require-dev": {
         "orchestra/testbench": "*",
-        "orchestra/testbench-core": ">=7.0",
-        "phpunit/phpunit": ">=9.5",
+        "orchestra/testbench-core": ">=9.0",
+        "phpunit/phpunit": ">=11.0",
         "nilportugues/sql-query-formatter": "^1.2.2"
     },
     "extra": {

@@ -16,23 +16,10 @@ class Test extends BaseTestCase
         return [DatabaseMockServiceProvider::class];
     }
 
-    /**
-     * For testing both Laravel 7.x+ and 6.x-
-     *
-     * @param  string $date
-     * @return string
-     */
-    protected function formatDate(string $date): string
-    {
-        return version_compare($this->app->version(), '7', '<')
-            ? Carbon::parse($date)->format('Y-m-d H:i:s')
-            : $date;
-    }
-
     public function testSelectToFetchAll(): void
     {
         $pdo = DBMock::mockPdo();
-        $pdo->shouldSelect('select * from `users`')
+        $pdo->shouldSelect('select * from "users"')
             ->shouldFetchAllReturns([[
                 'id' => 1,
                 'name' => 'John',
@@ -45,8 +32,8 @@ class Test extends BaseTestCase
             'id' => 1,
             'name' => 'John',
             'email' => 'john@example.com',
-            'created_at' => $this->formatDate('2020-01-01T00:00:00.000000Z'),
-            'updated_at' => $this->formatDate('2020-01-01T00:00:00.000000Z'),
+            'created_at' => '2020-01-01T00:00:00.000000Z',
+            'updated_at' => '2020-01-01T00:00:00.000000Z',
         ]], User::all()->toArray());
     }
 
@@ -56,7 +43,7 @@ class Test extends BaseTestCase
 
         $pdo = DBMock::mockPdo();
         $pdo->shouldInsert(
-            'insert into `users` (`name`, `email`, `updated_at`, `created_at`) values (?, ?, ?, ?)',
+            'insert into "users" ("name", "email", "updated_at", "created_at") values (?, ?, ?, ?)',
             ['John', 'john@example.com', '2020-01-01 00:00:00', '2020-01-01 00:00:00']
         );
         $pdo->expects('lastInsertId')->andReturn(2);
@@ -67,8 +54,8 @@ class Test extends BaseTestCase
             'id' => 2,
             'name' => 'John',
             'email' => 'john@example.com',
-            'created_at' => $this->formatDate('2020-01-01T00:00:00.000000Z'),
-            'updated_at' => $this->formatDate('2020-01-01T00:00:00.000000Z'),
+            'created_at' => '2020-01-01T00:00:00.000000Z',
+            'updated_at' => '2020-01-01T00:00:00.000000Z',
         ], $user->toArray());
     }
 
@@ -79,7 +66,7 @@ class Test extends BaseTestCase
         $pdo = DBMock::mockPdo();
         $pdo->shouldInsert(
             Mockery::on(function (string $sql) {
-                $this->assertSame('insert into `users` (`name`, `email`, `updated_at`, `created_at`) values (?, ?, ?, ?)', $sql);
+                $this->assertSame('insert into "users" ("name", "email", "updated_at", "created_at") values (?, ?, ?, ?)', $sql);
                 return true;
             }),
             ['John', 'john@example.com', '2020-01-01 00:00:00', '2020-01-01 00:00:00']
@@ -92,8 +79,8 @@ class Test extends BaseTestCase
             'id' => 2,
             'name' => 'John',
             'email' => 'john@example.com',
-            'created_at' => $this->formatDate('2020-01-01T00:00:00.000000Z'),
-            'updated_at' => $this->formatDate('2020-01-01T00:00:00.000000Z'),
+            'created_at' => '2020-01-01T00:00:00.000000Z',
+            'updated_at' => '2020-01-01T00:00:00.000000Z',
         ], $user->toArray());
     }
 
@@ -102,7 +89,7 @@ class Test extends BaseTestCase
         Carbon::setTestNow('2020-01-02 00:00:00');
 
         $pdo = DBMock::mockPdo();
-        $pdo->shouldSelect('select * from `users` where `email` = ? limit 1', ['john@example.com'])
+        $pdo->shouldSelect('select * from "users" where "email" = ? limit 1', ['john@example.com'])
             ->shouldFetchAllReturns([[
                 'id' => 2,
                 'name' => 'John',
@@ -111,9 +98,7 @@ class Test extends BaseTestCase
                 'updated_at' => '2020-01-01 00:00:00',
             ]]);
         $pdo->shouldUpdateOne(
-            version_compare($this->app->version(), '5.8', '<')
-                ? 'update `users` set `email` = ?, `updated_at` = ? where `id` = ?'
-                : 'update `users` set `email` = ?, `users`.`updated_at` = ? where `id` = ?',
+            'update "users" set "email" = ?, "updated_at" = ? where "id" = ?',
             ['john-01@example.com', '2020-01-02 00:00:00', 2]
         );
 
@@ -123,8 +108,8 @@ class Test extends BaseTestCase
             'id' => 2,
             'name' => 'John',
             'email' => 'john-01@example.com',
-            'created_at' => $this->formatDate('2020-01-01T00:00:00.000000Z'),
-            'updated_at' => $this->formatDate('2020-01-02T00:00:00.000000Z'),
+            'created_at' => '2020-01-01T00:00:00.000000Z',
+            'updated_at' => '2020-01-02T00:00:00.000000Z',
         ], $user->toArray());
     }
 
@@ -134,7 +119,7 @@ class Test extends BaseTestCase
 
         $pdos = DBMock::mockEachPdo();
         $pdos->reader()
-            ->shouldSelect('select * from `users` where `email` = ? limit 1', ['john@example.com'])
+            ->shouldSelect('select * from "users" where "email" = ? limit 1', ['john@example.com'])
             ->shouldFetchAllReturns([[
                 'id' => 2,
                 'name' => 'John',
@@ -144,9 +129,7 @@ class Test extends BaseTestCase
             ]]);
         $pdos->writer()
             ->shouldUpdateOne(
-                version_compare($this->app->version(), '5.8', '<')
-                    ? 'update `users` set `email` = ?, `updated_at` = ? where `id` = ?'
-                    : 'update `users` set `email` = ?, `users`.`updated_at` = ? where `id` = ?',
+                'update "users" set "email" = ?, "updated_at" = ? where "id" = ?',
                 ['john-01@example.com', '2020-01-02 00:00:00', 2]
             );
 
@@ -156,8 +139,8 @@ class Test extends BaseTestCase
             'id' => 2,
             'name' => 'John',
             'email' => 'john-01@example.com',
-            'created_at' => $this->formatDate('2020-01-01T00:00:00.000000Z'),
-            'updated_at' => $this->formatDate('2020-01-02T00:00:00.000000Z'),
+            'created_at' => '2020-01-01T00:00:00.000000Z',
+            'updated_at' => '2020-01-02T00:00:00.000000Z',
         ], $user->toArray());
     }
 
@@ -167,12 +150,10 @@ class Test extends BaseTestCase
 
         $pdo = DBMock::mockPdo()->inAnyOrder();
         $pdo->shouldUpdateOne(
-            version_compare($this->app->version(), '5.8', '<')
-                ? 'update `users` set `email` = ?, `updated_at` = ? where `id` = ?'
-                : 'update `users` set `email` = ?, `users`.`updated_at` = ? where `id` = ?',
+            'update "users" set "email" = ?, "updated_at" = ? where "id" = ?',
             ['john-01@example.com', '2020-01-02 00:00:00', 2]
         );
-        $pdo->shouldSelect('select * from `users` where `email` = ? limit 1', ['john@example.com'])
+        $pdo->shouldSelect('select * from "users" where "email" = ? limit 1', ['john@example.com'])
             ->shouldFetchAllReturns([[
                 'id' => 2,
                 'name' => 'John',
@@ -187,8 +168,8 @@ class Test extends BaseTestCase
             'id' => 2,
             'name' => 'John',
             'email' => 'john-01@example.com',
-            'created_at' => $this->formatDate('2020-01-01T00:00:00.000000Z'),
-            'updated_at' => $this->formatDate('2020-01-02T00:00:00.000000Z'),
+            'created_at' => '2020-01-01T00:00:00.000000Z',
+            'updated_at' => '2020-01-02T00:00:00.000000Z',
         ], $user->toArray());
     }
 }
