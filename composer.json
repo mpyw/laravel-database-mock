@@ -23,8 +23,8 @@
     "require": {
         "php": "^8.2",
         "ext-pdo": "*",
-        "illuminate/database": "^11.0 || ^12.0 || ^13.0",
-        "illuminate/support": "^11.0 || ^12.0 || ^13.0",
+        "illuminate/database": "^11.0 || ^12.0 || ^13.0 || ^14.0",
+        "illuminate/support": "^11.0 || ^12.0 || ^13.0 || ^14.0",
         "mpyw/mockery-pdo": "0.0.1-alpha8@alpha"
     },
     "require-dev": {

@@ -8,7 +8,7 @@ Database Mocking Library which mocks `PDO` underlying Laravel Connection classes
 ## Requirements
 
 - PHP: `^8.2`
-- Laravel: `^11.0 || ^12.0`
+- Laravel: `^11.0 || ^12.0 || ^13.0 || ^14.0`
 - Mockery: `^1.6.12`
 - [mpyw/mockery-pdo](https://github.com/mpyw/mockery-pdo): `alpha`
 
